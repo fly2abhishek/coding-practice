@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Todo list</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			#app {
+				max-width: 500px;
+				margin: 0 auto;
+				padding: 20px;
+			}
+			#todo-form {
+				display: flex;
+				justify-content: space-between;
+				margin-bottom: 20px;
+			}
+			#todo-form input {
+				flex: 1;
+				padding: 10px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+			}
+			#todo-form button {
+				padding: 10px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				background: #fff;
+				cursor: pointer;
+				margin: 0 5px;
+			}
+			#todo-form button:hover {
+				background: #eee;
+			}
+			#todo-list {
+				list-style: none;
+				padding: 0;
+			}
+			#todo-list li {
+				position: relative;
+				padding: 10px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				margin-bottom: 10px;
+			}
+			#todo-list li::after {
+				content: "\00d7";
+				height: 10px;
+				width: 10px;
+				position: absolute;
+				top: calc(50% - 10px);
+				left: calc(100% - 20px);
+				cursor: pointer;
+				display: inline-block;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div>
+				<h1>Todo list</h1>
+			</div>
+			<form id="todo-form">
+				<input type="text" id="todo-input" placeholder="Enter a todo"/>
+				<button type="submit">Add</button>
+			</form>
+			<div>
+				<ul id="todo-list"></ul>
+			</div>
+		</div>
+		<script src="todolist.js"></script>
+	</body>
+</html>

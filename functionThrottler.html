@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Function Throttler</title>
+</head>
+
+<body>
+  <div id="functionThrottler">
+    <div>
+      <h1 class="header">Function Throttler</h1>
+      <div class="body">
+        <button onclick="wakeup()">Wakeup</button>
+        <button onclick="callFunc()">Call</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const loggerFunction = () => {
+      console.log("Server is called");
+    }
+
+    function functionThrottler(fn, delay = 2000) {
+      let lastCallTime = 0;
+      let timeoutId = null;
+
+      return function (...args) {
+        const currentTime = Date.now();
+
+        if (currentTime - lastCallTime < delay) {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => {
+            lastCallTime = currentTime;
+            fn.apply(this, args);
+          }, delay);
+        } else {
+          lastCallTime = currentTime;
+          fn.apply(this, args);
+        }
+      };
+    }
+
+    let mainFunction;
+
+    const wakeup = () => {
+      mainFunction = functionThrottler(loggerFunction, 2000);
+      console.log('Sysem is awake');
+    }
+
+    const callFunc = () => {
+      if (!mainFunction) {
+        console.log('system not woken up')
+      } else {
+        mainFunction();
+      }
+    }
+
+  </script>
+</body>
+
+</html>
